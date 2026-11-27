@@ -2,6 +2,10 @@
 
 A small local relative Markdown inline-link checker. Checks existence and root containment, not external URL availability, fragments or full Markdown syntax.
 
+## Optional fragment checks
+
+`anchors.missing_fragments(root, document)` checks ordinary local Markdown fragments against plain ATX headings (including duplicate suffixes) and explicit HTML id/name anchors. It ignores fenced code, simple inline-code examples, external URLs and non-Markdown targets. Use together with `doclinks.broken_links` for path checks. It is not a complete Markdown parser; complex inline heading markup, reference links and renderer-specific slugs need separate review. All files and results stay in the caller's checkout.
+
 ## Run locally
 
 ```sh
