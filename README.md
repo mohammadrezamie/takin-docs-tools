@@ -1,10 +1,14 @@
 # takin-docs-tools
 
-A small local relative Markdown inline-link checker. Checks existence and root containment, not external URL availability, fragments or full Markdown syntax.
+Local Markdown link, image and fragment diagnostics. All checks run against files in the caller's checkout; the tool makes no network requests.
+
+## Path/link checks
+
+`doclinks.broken_links(root, document)` checks simple relative inline links, angle-bracket destinations, explicit reference links (`[label][id]` and `[id][]`) and local image targets. It detects missing paths, root escapes and unresolved reference labels. External URLs and fragment-only links are intentionally ignored. It is a bounded parser, not a complete CommonMark implementation: shortcut references, nested/escaped parentheses, complex multiline syntax and renderer-specific edge cases require a full Markdown parser.
 
 ## Optional fragment checks
 
-`anchors.missing_fragments(root, document)` checks ordinary local Markdown fragments against plain ATX headings (including duplicate suffixes) and explicit HTML id/name anchors. It ignores fenced code, simple inline-code examples, external URLs and non-Markdown targets. Use together with `doclinks.broken_links` for path checks. It is not a complete Markdown parser; complex inline heading markup, reference links and renderer-specific slugs need separate review. All files and results stay in the caller's checkout.
+`anchors.missing_fragments(root, document)` checks ordinary local Markdown fragments against plain ATX headings (including duplicate suffixes) and explicit HTML id/name anchors. It ignores fenced code, simple inline-code examples, external URLs and non-Markdown targets. Use together with `doclinks.broken_links` for path checks. Complex inline heading markup and renderer-specific slugs need separate review.
 
 ## Run locally
 
