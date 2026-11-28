@@ -18,6 +18,10 @@ python3 -m unittest discover -v
 
 Uses standard-library dependencies only. CI runs this repository's own code and synthetic tests on two standard Linux runner images in parallel. Failed jobs remain visible; no private checkout, cross-repository tokens, deployment, production data or private test artifacts are used.
 
+## Audit CLI
+
+Run `python3 audit.py --root /path/to/project --fragments README.md docs/guide.md` to check an explicit set of local Markdown files. It emits JSON with the selected document count, path and optional fragment diagnostics, and issue count. Exit 0 means no supported issues found; 1 means findings; 2 means blocked input or read failure. Empty selections, duplicate aliases, absolute document paths and escapes are rejected. No automatic discovery or network requests. Fragment support is the bounded ordinary-inline syntax described above, not reference-link fragment resolution. The output contains relative document names and link destinations; treat private output as private. This is not a complete renderer or a security sandbox.
+
 ## Integration boundary
 
 This is an independently useful public utility, not a mirror or remote runner for a private application. Consumers should pin a reviewed version and run their own integration checks. A green public CI run certifies only this utility at its tested commit, not any consuming application.
